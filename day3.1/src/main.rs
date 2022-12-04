@@ -319,12 +319,8 @@ fn main() {
     VqLtFCqFJfVtVjsNgPNNMMWNwgtNvn";
 
     fn find_common(elf1: &str, elf2: &str, elf3: &str) -> Option<char> {
-        for character in elf1.chars() {
-            if elf2.contains(character) && elf3.contains(character) {
-                return Some(character);
-            }
-        }
-        None
+        elf1.chars()
+            .find(|&character| elf2.contains(character) && elf3.contains(character))
     }
 
     let mut elf1: &str;
