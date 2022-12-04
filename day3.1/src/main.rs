@@ -2,16 +2,15 @@ fn get_letter_score(input: char) -> u32 {
     let letters = "abcdefghijklmnopqrstuvwxyz";
 
     let search_element = input.to_ascii_lowercase();
-    let index = (letters.find(search_element).unwrap() as u32)+1;
+    let index = (letters.find(search_element).unwrap() as u32) + 1;
     if input.is_uppercase() {
-        index+26
+        index + 26
     } else {
         index
     }
 }
 
 fn main() {
-
     // let source_data = "vJrwpWtwJgWrhcsFMMfFFhFp
     // jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
     // PmmdzqPrVvPwwTWBwg
@@ -321,8 +320,8 @@ fn main() {
 
     fn find_common(elf1: &str, elf2: &str, elf3: &str) -> Option<char> {
         for character in elf1.chars() {
-            if elf2.contains(character) && elf3.contains(character)  {
-                return Some(character)
+            if elf2.contains(character) && elf3.contains(character) {
+                return Some(character);
             }
         }
         None
@@ -333,7 +332,7 @@ fn main() {
     let mut elf3: &str;
     let mut lines = source_data.lines();
     let mut result: u32 = 0;
-    for _ in 0..lines.clone().count()/3 {
+    for _ in 0..lines.clone().count() / 3 {
         elf1 = lines.next().unwrap().trim();
         elf2 = lines.next().unwrap().trim();
         elf3 = lines.next().unwrap().trim();
@@ -341,12 +340,10 @@ fn main() {
             Some(val) => {
                 result += get_letter_score(val);
                 println!("{elf1} {elf2} {elf3} -> {:?}", get_letter_score(val));
-            },
-            None => println!("No common in {elf1} {elf2} {elf3}")
+            }
+            None => println!("No common in {elf1} {elf2} {elf3}"),
         }
     }
 
-
     println!("final score: {result}");
-
 }

@@ -1,4 +1,3 @@
-
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Play {
     Rock,
@@ -27,11 +26,8 @@ impl From<&str> for Play {
             "Z" => Play::Scissors,
             _ => panic!(),
         }
-
     }
 }
-
-
 
 impl PartialOrd for Play {
     fn partial_cmp(&self, _other: &Self) -> Option<std::cmp::Ordering> {
@@ -80,7 +76,6 @@ pub enum WantedResult {
     Draw,
 }
 
-
 impl From<&str> for WantedResult {
     fn from(input: &str) -> WantedResult {
         match input {
@@ -97,7 +92,7 @@ impl WantedResult {
         match &self {
             WantedResult::Win => Play::find_win(&other),
             WantedResult::Lose => Play::find_loss(&other),
-            WantedResult::Draw => other
+            WantedResult::Draw => other,
         }
     }
 }
@@ -2622,7 +2617,6 @@ fn main() {
         println!("result: {me:?}\t them {them:?}\t played {my_play:?}");
         score += play_result + item_score;
         // println!("{} {score}\t{play_result} {item_score} - {left:?}\t{right:?}", strat.trim());
-
     }
 
     println!("Total score: {score}");

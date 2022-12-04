@@ -2,16 +2,15 @@ fn get_letter_score(input: char) -> u32 {
     let letters = "abcdefghijklmnopqrstuvwxyz";
 
     let search_element = input.to_ascii_lowercase();
-    let index = (letters.find(search_element).unwrap() as u32)+1;
+    let index = (letters.find(search_element).unwrap() as u32) + 1;
     if input.is_uppercase() {
-        index+26
+        index + 26
     } else {
         index
     }
 }
 
 fn main() {
-
     // let source_data = "vJrwpWtwJgWrhcsFMMfFFhFp
     // jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
     // PmmdzqPrVvPwwTWBwg
@@ -332,20 +331,16 @@ fn main() {
         if line_length % 2 != 0 {
             panic!("uh, line length is odd!: {stripped_line}");
         }
-        (left_half, right_half) = stripped_line.split_at(line_length/2);
+        (left_half, right_half) = stripped_line.split_at(line_length / 2);
         for character in left_half.chars() {
-            if right_half.contains(character) {
-                if !already_seen.contains(&character) {
-                    already_seen.push(character);
-                    let char_score = get_letter_score(character);
-                    println!("{character} = {char_score}");
-                    score += char_score;
-                }
+            if right_half.contains(character) && !already_seen.contains(&character) {
+                already_seen.push(character);
+                let char_score = get_letter_score(character);
+                println!("{character} = {char_score}");
+                score += char_score;
             }
         }
         // Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
-
     }
     println!("final score: {score}");
-
 }

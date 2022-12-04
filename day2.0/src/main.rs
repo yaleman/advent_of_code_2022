@@ -1,4 +1,3 @@
-
 #[derive(Debug, PartialEq, Eq)]
 pub enum Play {
     Rock,
@@ -27,11 +26,8 @@ impl From<&str> for Play {
             "Z" => Play::Scissors,
             _ => panic!(),
         }
-
     }
 }
-
-
 
 impl PartialOrd for Play {
     fn partial_cmp(&self, _other: &Self) -> Option<std::cmp::Ordering> {
@@ -57,7 +53,6 @@ impl Play {
             0
         }
     }
-
 }
 
 fn main() {
@@ -2576,8 +2571,10 @@ fn main() {
         play_result = right.play(&left);
         item_score = u64::from(&right);
         score += play_result + item_score;
-        println!("{} {score}\t{play_result} {item_score} - {left:?}\t{right:?}", strat.trim());
-
+        println!(
+            "{} {score}\t{play_result} {item_score} - {left:?}\t{right:?}",
+            strat.trim()
+        );
     }
     if score == 15128 {
         eprintln!("failed, too high");

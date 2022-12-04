@@ -1,8 +1,4 @@
-
-
-
 fn main() {
-
     // let elf_lines = "1000
     // 2000
     // 3000
@@ -2256,8 +2252,6 @@ fn main() {
     10054
     13688"#;
 
-
-
     let mut calories = 0;
     let mut biggest_elf = 0;
     let mut biggest_elf_calories = 0;
@@ -2271,10 +2265,8 @@ fn main() {
             calories = 0;
             elf_counter += 1;
         } else {
-            calories += u32::from_str_radix(line.trim(), 10).unwrap();
+            calories += line.trim().parse::<u32>().unwrap();
         }
     }
     println!("Biggest Elf {biggest_elf} {biggest_elf_calories}");
-
-
 }
