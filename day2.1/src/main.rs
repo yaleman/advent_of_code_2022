@@ -1,5 +1,5 @@
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Play {
     Rock,
     Paper,
@@ -57,7 +57,49 @@ impl Play {
             0
         }
     }
+    fn find_loss(other: &Self) -> Self {
+        match &other {
+            Play::Rock => Self::Scissors,
+            Play::Paper => Self::Rock,
+            Play::Scissors => Self::Paper,
+        }
+    }
+    fn find_win(other: &Self) -> Self {
+        match &other {
+            Play::Rock => Self::Paper,
+            Play::Paper => Self::Scissors,
+            Play::Scissors => Self::Rock,
+        }
+    }
+}
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum WantedResult {
+    Win,
+    Lose,
+    Draw,
+}
+
+
+impl From<&str> for WantedResult {
+    fn from(input: &str) -> WantedResult {
+        match input {
+            "X" => WantedResult::Lose,
+            "Y" => WantedResult::Draw,
+            "Z" => WantedResult::Win,
+            _ => panic!(),
+        }
+    }
+}
+
+impl WantedResult {
+    fn find_play(&self, other: Play) -> Play {
+        match &self {
+            WantedResult::Win => Play::find_win(&other),
+            WantedResult::Lose => Play::find_loss(&other),
+            WantedResult::Draw => other
+        }
+    }
 }
 
 fn main() {
@@ -2567,26 +2609,21 @@ fn main() {
     C Y";
 
     let mut score: u64 = 0;
-    let mut play_result: u64;
-    let mut item_score: u64;
     for strat in strats.lines() {
         let mut split = strat.trim().split(' ');
-        let left: Play = split.next().unwrap().into();
-        let right: Play = split.next().unwrap().into();
-        play_result = right.play(&left);
-        item_score = u64::from(&right);
+        let them: Play = split.next().unwrap().into();
+        let me: WantedResult = split.next().unwrap().into();
+
+        let my_play = me.find_play(them.clone());
+
+        let play_result = my_play.play(&them);
+        let item_score = u64::from(&my_play);
+
+        println!("result: {me:?}\t them {them:?}\t played {my_play:?}");
         score += play_result + item_score;
-        println!("{} {score}\t{play_result} {item_score} - {left:?}\t{right:?}", strat.trim());
+        // println!("{} {score}\t{play_result} {item_score} - {left:?}\t{right:?}", strat.trim());
 
     }
-    if score == 15128 {
-        eprintln!("failed, too high");
-    }
-    if score == 10094 {
-        eprintln!("failed, too high");
-    }
-    if score == 9759 {
-        eprintln!("Success!")
-    }
+
     println!("Total score: {score}");
 }
