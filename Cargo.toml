@@ -1,0 +1,18 @@
+[workspace.package]
+# name = "advent_of_code_2022"
+description = "Derp"
+version = "0.0.1"
+edition = "2021"
+rust-version = "1.64"
+license = "MIT"
+repository = "https://github.com/yaleman/advent_of_code_2022.git"
+keywords = ["bad"]
+categories = ["fail"]
+
+
+[workspace]
+members = [
+    "day1.0",
+    "day1.1",
+    "day2.0",
+]
