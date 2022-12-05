@@ -548,9 +548,8 @@ fn main() {
         while colnum < max_len / 3 {
             // println!("colnum: {colnum}");
             if let Some(val) = line.get((1 + colnum * 4)..=(1 + colnum * 4)) {
-
                 if val.trim() != "" {
-                    println!("col{}: {val}",colnum+1);
+                    println!("col{}: {val}", colnum + 1);
                     piles
                         .entry(colnum + 1)
                         .and_modify(|e| e.push(val.chars().next().unwrap()))
@@ -558,7 +557,7 @@ fn main() {
                 }
             }
             if colnum > max_cols {
-                max_cols = colnum-1;
+                max_cols = colnum - 1;
             }
             colnum += 1
         }
@@ -572,29 +571,31 @@ fn main() {
     for line in move_input.lines() {
         println!("{}", line.trim());
         let moves = move_parser.captures(line).unwrap();
-        let num = moves
-            .name("num")
-            .unwrap()
-            .as_str()
-            .parse::<usize>()
-            .unwrap();
-        let src = moves
-            .name("src")
-            .unwrap()
-            .as_str()
-            .parse::<usize>()
-            .unwrap();
-        let dest = moves
-            .name("dest")
-            .unwrap()
-            .as_str()
-            .parse::<usize>()
-            .unwrap();
         println!("before move: {piles:?}");
-        move_items(&mut piles, num, src, dest);
+        move_items(
+            &mut piles,
+            moves
+                .name("num")
+                .unwrap()
+                .as_str()
+                .parse::<usize>()
+                .unwrap(),
+            moves
+                .name("src")
+                .unwrap()
+                .as_str()
+                .parse::<usize>()
+                .unwrap(),
+            moves
+                .name("dest")
+                .unwrap()
+                .as_str()
+                .parse::<usize>()
+                .unwrap(),
+        );
         println!("after move: {piles:?}");
     }
-    for i in 1..max_cols+1 {
+    for i in 1..max_cols + 1 {
         print!("{}", piles.get(&i).unwrap().last().unwrap());
     }
     // answer is VCTFTJQCG
