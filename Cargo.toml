@@ -9,6 +9,8 @@ repository = "https://github.com/yaleman/advent_of_code_2022.git"
 keywords = ["bad"]
 categories = ["fail"]
 
+[workspace.dependencies]
+regex = "1.7.0"
 
 [workspace]
 members = [
@@ -20,4 +22,5 @@ members = [
     "day3.1",
     "day4.0",
     "day4.1",
+    "day5.0",
 ]
